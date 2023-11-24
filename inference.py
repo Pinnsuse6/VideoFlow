@@ -58,7 +58,7 @@ def MOF_inference(model, cfg):
     model.eval()
 
     input_images = prepare_image(cfg.seq_dir)
-    input_images = input_images[None].cuda([0, 1])
+    input_images = input_images[None].cuda(0)
     padder = InputPadder(input_images.shape)
     input_images = padder.pad(input_images)
     flow_pre, _ = model(input_images, {})
@@ -72,7 +72,7 @@ def BOF_inference(model, cfg):
     model.eval()
 
     input_images = prepare_image(cfg.seq_dir)
-    input_images = input_images[None].cuda([0, 1])
+    input_images = input_images[None].cuda(0)
     padder = InputPadder(input_images.shape)
     input_images = padder.pad(input_images)
     flow_pre, _ = model(input_images, {})
@@ -103,7 +103,7 @@ if __name__ == '__main__':
     model = torch.nn.DataParallel(build_network(cfg), device_ids=[0, 1])
     model.load_state_dict(torch.load(cfg.model))
 
-    model.cuda([0, 1])
+    model.cuda(0)
     model.eval()
 
     print(cfg.model)
