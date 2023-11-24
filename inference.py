@@ -87,7 +87,7 @@ def count_parameters(model):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', default='MOF')
-    parser.add_argument('--seq_dir', default='demo_input_images')
+    parser.add_argument('--seq_dir', default='kaggle/input/videoflow-code/demo_input_images')
     parser.add_argument('--vis_dir', default='kaggle/working/demo_flow_vis/')
     
     args = parser.parse_args()
