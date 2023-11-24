@@ -15,7 +15,7 @@ _CN.critical_params = []
 
 _CN.network = 'MOFNetStack'
 
-_CN.model = 'VideoFlow_ckpt/MOF_sintel.pth'
+_CN.model = '/kaggle/input/videoflow-code/VideoFlow_ckpt/MOF_sintel.pth'
 _CN.input_frames = 5
 
 _CN.restore_ckpt = False
