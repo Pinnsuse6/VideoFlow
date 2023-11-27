@@ -153,7 +153,7 @@ class FlyingThings3D(FlowDataset):
                 self.flow_list.append([root+flow1.strip(), root+flow2.strip()])
 
 class MpiSintel(FlowDataset):
-    def __init__(self, aug_params=None, split='training', root='datasets/Sintel', dstype='clean', reverse_rate=0.3):
+    def __init__(self, aug_params=None, split='training', root='/kaggle/input/', dstype='clean', reverse_rate=0.3):
         super(MpiSintel, self).__init__(aug_params, oneside=True, reverse_rate=reverse_rate)
 
         self.image_list = []
@@ -250,12 +250,13 @@ def fetch_dataloader(args, TRAIN_DS='C+T+K+S+H'):
         train_dataset = clean_dataset + final_dataset
     elif args.stage == 'sintel':
         aug_params = {'crop_size': args.image_size, 'min_scale': -0.2, 'max_scale': 0.6, 'do_flip': True}
-        things = FlyingThings3D(aug_params, dstype='frames_cleanpass')
+        # things = FlyingThings3D(aug_params, dstype='frames_cleanpass')
         sintel_clean = MpiSintel(aug_params, split='training', dstype='clean')
         sintel_final = MpiSintel(aug_params, split='training', dstype='final')        
-        hd1k = HD1K({'crop_size': args.image_size, 'min_scale': -0.5, 'max_scale': 0.2, 'do_flip': True})
-        kitti = KITTI({'crop_size': args.image_size, 'min_scale': -0.3, 'max_scale': 0.5, 'do_flip': True})
-        train_dataset = 100*sintel_clean + 100*sintel_final + 200*kitti + 5*hd1k + things
+        # hd1k = HD1K({'crop_size': args.image_size, 'min_scale': -0.5, 'max_scale': 0.2, 'do_flip': True})
+        # kitti = KITTI({'crop_size': args.image_size, 'min_scale': -0.3, 'max_scale': 0.5, 'do_flip': True})
+        # train_dataset = 100*sintel_clean + 100*sintel_final + 200*kitti + 5*hd1k + things
+        train_dataset = 100*sintel_clean + 100*sintel_final
     elif args.stage == 'kitti':
         aug_params = {'crop_size': args.image_size, 'min_scale': -0.2, 'max_scale': 0.4, 'do_flip': False}
         train_dataset = KITTI(aug_params, split='training')

@@ -11,8 +11,12 @@ def process_transformer_cfg(cfg):
 
     return log_dir
 
+
 def process_cfg(cfg):
+    # root directory
+    root = '/kaggle/working/'
     log_dir = 'logs/' + cfg.name + '/' + cfg.network + '/'
+    log_dir = root + log_dir
     critical_params = [cfg.trainer[key] for key in cfg.critical_params]
     for name, param in zip(cfg["critical_params"], critical_params):
         log_dir += "{:s}[{:s}]".format(name, str(param))
