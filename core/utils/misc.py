@@ -29,5 +29,5 @@ def process_cfg(cfg):
     cfg.log_dir = log_dir
     os.makedirs(log_dir)
 
-    shutil.copytree('configs', f'{log_dir}/configs')
-    shutil.copytree('core', f'{log_dir}/core')
+    shutil.copytree('/kaggle/input/videoflow-code/configs', f'{log_dir}/configs')
+    shutil.copytree('/kaggle/input/videoflow-code/core', f'{log_dir}/core')
