@@ -123,6 +123,7 @@ def train(cfg):
                 break
 
     logger.close()
+    os.mkdir(cfg.log_dir + '/final')
     PATH = cfg.log_dir + '/final/BOF_sintel_train.pth'
     torch.save(model.state_dict(), PATH)
 
