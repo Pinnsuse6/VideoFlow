@@ -28,7 +28,7 @@ _CN.BOFNet.gma = 'GMA-SK2'
 _CN.BOFNet.corr_fn = "default"
 _CN.BOFNet.mixed_precision = False
 
-_CN.BOFNet.decoder_depth = 12
+_CN.BOFNet.decoder_depth = 6
 _CN.BOFNet.critical_params = ["cnet", "fnet", "pretrain", "corr_fn", "mixed_precision"]
 
 
