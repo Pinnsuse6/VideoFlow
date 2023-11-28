@@ -46,6 +46,8 @@ except:
         def update(self):
             pass
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
+print(torch.cuda.device_count())
 
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
@@ -58,9 +60,9 @@ def train(cfg):
         print("[Using smooth L1 loss]")
         loss_func = sequence_loss_smooth
 
-    # model = nn.DataParallel(build_network(cfg))
-    torch.distributed.init_process_group(backend='nccl', init_method='tcp://localhost:23456', world_size=1, rank=0)
-    model = nn.parallel.DistributedDataParallel(build_network(cfg).cuda())
+    model = nn.DataParallel(build_network(cfg))
+    # torch.distributed.init_process_group(backend='nccl', init_method='tcp://localhost:23456', world_size=1, rank=0)
+    # model = nn.parallel.DistributedDataParallel(build_network(cfg).cuda())
     loguru_logger.info("Parameter Count: %d" % count_parameters(model))
 
     if cfg.restore_ckpt is not None:
