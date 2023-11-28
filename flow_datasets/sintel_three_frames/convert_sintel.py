@@ -3,7 +3,7 @@ import os.path as osp
 from glob import glob
 import os
 
-root = "/mnt/lustre/share/cp/caodongliang/MPI-Sintel/"
+root = "kaggle/input/sintel/"
 
 for split in ['training']:
     for dstype in ['clean', 'final']:
@@ -32,18 +32,18 @@ for split in ['training']:
                 extra_info_list.append(str(i))
         
         for idx in range(len(image_list)):
-            image_list[idx] = image_list[idx].replace("/mnt/lustre/share/cp/caodongliang/MPI-Sintel", "Sintel") + "\n"
+            image_list[idx] = image_list[idx].replace("/kaggle/input/sintel", "sintel") + "\n"
         for idx in range(len(flow_list)):
-            flow_list[idx] = flow_list[idx].replace("/mnt/lustre/share/cp/caodongliang/MPI-Sintel", "Sintel") + "\n"
+            flow_list[idx] = flow_list[idx].replace("/kaggle/input/sintel", "sintel") + "\n"
         for idx in range(len(extra_info_list)):
             extra_info_list[idx] = extra_info_list[idx] + "\n"
 
-        with open(osp.join("sintel_three_frames", "Sintel_"+dstype+"_png.txt"), 'w') as f:
+        with open(osp.join("/kaggle/working/", "sintel_three_frames", "Sintel_"+dstype+"_png.txt"), 'w') as f:
             f.writelines(image_list)
             print(len(image_list))
-        with open(osp.join("sintel_three_frames", "Sintel_"+dstype+"_flo.txt"), 'w') as f:
+        with open(osp.join("/kaggle/working/", "sintel_three_frames", "Sintel_"+dstype+"_flo.txt"), 'w') as f:
             f.writelines(flow_list)
             print(len(flow_list))
-        with open(osp.join("sintel_three_frames", "Sintel_"+dstype+"_extra_info.txt"), 'w') as f:
+        with open(osp.join("/kaggle/working/", "sintel_three_frames", "Sintel_"+dstype+"_extra_info.txt"), 'w') as f:
             f.writelines(extra_info_list)
             print(len(extra_info_list))
