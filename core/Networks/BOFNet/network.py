@@ -119,7 +119,7 @@ class BOFNet(nn.Module):
             
             corr21 = corr_fn_21(coords1_21)
             corr23 = corr_fn_23(coords1_23)
-            corr =  torch.cat([corr23, corr21], dim=1)
+            corr = torch.cat([corr23, corr21], dim=1)
             
             flow21 = coords1_21 - coords0_21
             flow23 = coords1_23 - coords0_23
