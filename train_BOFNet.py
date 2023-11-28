@@ -47,6 +47,7 @@ except:
             pass
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+print(torch.cuda.device_count())
 
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
