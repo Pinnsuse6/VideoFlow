@@ -149,6 +149,4 @@ if __name__ == '__main__':
     torch.manual_seed(1234)
     np.random.seed(1234)
     
-    os.system("echo %PYTORCH_CUDA_ALLOC_CONF%")
-    
     train(cfg)
