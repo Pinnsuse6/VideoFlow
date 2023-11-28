@@ -46,7 +46,7 @@ except:
         def update(self):
             pass
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
 print(torch.cuda.device_count())
 
 def count_parameters(model):
