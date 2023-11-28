@@ -60,7 +60,7 @@ def train(cfg):
 
     # model = nn.DataParallel(build_network(cfg))
     torch.distributed.init_process_group(backend='nccl', init_method='tcp://localhost:23456', world_size=1, rank=0)
-    model = nn.parallel.DistributedDataParallel(build_network(cfg))
+    model = nn.parallel.DistributedDataParallel(build_network(cfg).cuda())
     loguru_logger.info("Parameter Count: %d" % count_parameters(model))
 
     if cfg.restore_ckpt is not None:
