@@ -46,7 +46,6 @@ except:
         def update(self):
             pass
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
 
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
