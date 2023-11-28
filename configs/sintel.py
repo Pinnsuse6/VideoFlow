@@ -5,10 +5,9 @@ _CN.name = ''
 _CN.suffix =''
 _CN.gamma = 0.85
 _CN.max_flow = 400
-_CN.batch_size = 2
+_CN.batch_size = 4
 _CN.sum_freq = 100
-# _CN.val_freq = 100000000
-_CN.val_freq = 100000
+_CN.val_freq = 100000000
 _CN.image_size = [432, 960]
 _CN.add_noise = False
 _CN.use_smoothl1 = False
@@ -28,7 +27,7 @@ _CN.BOFNet.gma = 'GMA-SK2'
 _CN.BOFNet.corr_fn = "default"
 _CN.BOFNet.mixed_precision = False
 
-_CN.BOFNet.decoder_depth = 6
+_CN.BOFNet.decoder_depth = 12
 _CN.BOFNet.critical_params = ["cnet", "fnet", "pretrain", "corr_fn", "mixed_precision"]
 
 
@@ -39,8 +38,8 @@ _CN.trainer.optimizer = 'adamw'
 _CN.trainer.canonical_lr = 12.5e-5
 _CN.trainer.adamw_decay = 1e-4
 _CN.trainer.clip = 1.0
-# _CN.trainer.num_steps = 120000
-_CN.trainer.num_steps = 120
+_CN.trainer.num_steps = 120000
+# _CN.trainer.num_steps = 120
 _CN.trainer.epsilon = 1e-8
 _CN.trainer.anneal_strategy = 'linear'
 
