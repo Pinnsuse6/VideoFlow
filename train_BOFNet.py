@@ -58,7 +58,8 @@ def train(cfg):
         print("[Using smooth L1 loss]")
         loss_func = sequence_loss_smooth
 
-    model = nn.DataParallel(build_network(cfg))
+    # model = nn.DataParallel(build_network(cfg))
+    model = nn.parallel.DistributedDataParallel(build_network(cfg))
     loguru_logger.info("Parameter Count: %d" % count_parameters(model))
 
     if cfg.restore_ckpt is not None:
