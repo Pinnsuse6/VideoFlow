@@ -157,13 +157,13 @@ class MpiSintel(FlowDataset):
         super(MpiSintel, self).__init__(aug_params, oneside=True, reverse_rate=reverse_rate)
 
         self.image_list = []
-        with open("./flow_datasets/sintel_three_frames/Sintel_"+dstype+"_png.txt") as f:
+        with open("/kaggle/input/videoflow-code/flow_datasets/sintel_three_frames/Sintel_"+dstype+"_png.txt") as f:
             images = f.readlines()
             for img1, img2, img3 in zip(images[0::3], images[1::3], images[2::3]):
                 self.image_list.append([root+img1.strip(), root+img2.strip(), root+img3.strip()])
         
         self.flow_list = []
-        with open("./flow_datasets/sintel_three_frames/Sintel_"+dstype+"_flo.txt") as f:
+        with open("/kaggle/input/videoflow-code/flow_datasets/sintel_three_frames/Sintel_"+dstype+"_flo.txt") as f:
             flows = f.readlines()
             for flow in flows:
                 self.flow_list.append(root+flow.strip())
@@ -171,10 +171,11 @@ class MpiSintel(FlowDataset):
         assert (len(self.image_list) == len(self.flow_list))
 
         self.extra_info = []
-        with open("./flow_datasets/sintel_three_frames/Sintel_"+dstype+"_extra_info.txt") as f:
+        with open("/kaggle/input/videoflow-code/flow_datasets/sintel_three_frames/Sintel_"+dstype+"_extra_info.txt") as f:
             info = f.readlines()
             for scene, id in zip(info[0::2], info[1::2]):
                 self.extra_info.append((scene.strip(), int(id.strip())))
+
 
 class MpiSintel_submission(FlowDataset):
     def __init__(self, aug_params=None, split='test', root='datasets/Sintel', dstype='clean', reverse_rate=-1):
