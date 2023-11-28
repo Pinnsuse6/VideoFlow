@@ -3,7 +3,7 @@ import os.path as osp
 from glob import glob
 import os
 
-root = "kaggle/input/sintel/"
+root = "/kaggle/input/sintel/"
 
 for split in ['training']:
     for dstype in ['clean', 'final']:
