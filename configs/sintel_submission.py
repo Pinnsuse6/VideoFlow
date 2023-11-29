@@ -17,7 +17,7 @@ _CN.network = 'BOFNet'
 
 _CN.restore_ckpt = False
 
-_CN.model = "VideoFlow_ckpt/BOF_sintel.pth"
+_CN.model = "VideoFlow_ckpt/BOF_sintel_train.pth"
 
 
 _CN.BOFNet = CN()
