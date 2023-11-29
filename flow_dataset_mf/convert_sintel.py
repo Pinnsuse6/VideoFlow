@@ -5,7 +5,8 @@ import os
 
 import pickle
 
-root = "/mnt/lustre/share/cp/caodongliang/MPI-Sintel/"
+# root = "/mnt/lustre/share/cp/caodongliang/MPI-Sintel/"
+root = "/kaggle/input/sintel/"
 
 for split in ['training']:
     for dstype in ['clean', 'final']:
@@ -21,19 +22,19 @@ for split in ['training']:
             flows = sorted(glob(osp.join(flow_root, scene, '*.flo')))
 
             for idx in range(len(images)):
-                images[idx] = images[idx].replace("/mnt/lustre/share/cp/caodongliang/MPI-Sintel", "Sintel") + "\n"
+                images[idx] = images[idx].replace("/kaggle/input/sintel", "sintel") + "\n"
             for idx in range(len(flows)):
-                flows[idx] = flows[idx].replace("/mnt/lustre/share/cp/caodongliang/MPI-Sintel", "Sintel") + "\n"
+                flows[idx] = flows[idx].replace("/kaggle/input/sintel", "sintel") + "\n"
 
             image_list.append(images)
             flow_list.append(flows)
             extra_info_list.append(scene)
         
-        with open("sintel_training_"+dstype+"_png.pkl", 'wb') as f:
+        with open(osp.join("/kaggle/working/", "sintel_three_frames", "sintel_training_"+dstype+"_png.pkl"), 'wb') as f:
             pickle.dump(image_list, f)
-        with open("sintel_training_"+dstype+"_flo.pkl", 'wb') as f:
+        with open(osp.join("/kaggle/working/", "sintel_three_frames", "sintel_training_"+dstype+"_flo.pkl"), 'wb') as f:
             pickle.dump(flow_list, f)
-        with open("sintel_training_scene.pkl", 'wb') as f:
+        with open(osp.join("/kaggle/working/", "sintel_three_frames", "sintel_training_scene.pkl"), 'wb') as f:
             pickle.dump(extra_info_list, f)
         
 
