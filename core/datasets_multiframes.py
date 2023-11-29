@@ -366,15 +366,16 @@ class MpiSintel(FlowDataset):
     def __init__(self, aug_params=None, input_frames=5, dstype='clean'):
         super(MpiSintel, self).__init__(aug_params=aug_params, input_frames=input_frames, oneside=True, sparse=False)
 
-        root = 'datasets/Sintel/'
+        # root = 'datasets/Sintel/'
+        root = '/kaggle/input/'
 
         self.image_list = []
         self.flow_list = []
         self.has_gt_list = []
 
-        with open("./flow_dataset_mf/sintel_training_"+dstype+"_png.pkl", "rb") as f:
+        with open("/kaggle/input/videoflow-code/flow_dataset_mf/sintel_training_"+dstype+"_png.pkl", "rb") as f:
             _image_list = pickle.load(f)
-        with open("./flow_dataset_mf/sintel_training_"+dstype+"_flo.pkl", "rb") as f:
+        with open("/kaggle/input/videoflow-code/flow_dataset_mf/sintel_training_"+dstype+"_flo.pkl", "rb") as f:
             _future_flow_list = pickle.load(f)
         
         len_list = len(_image_list)
@@ -539,25 +540,28 @@ def fetch_dataloader(args, TRAIN_DS='C+T+K+S+H'):
         train_dataset = clean_dataset + final_dataset
     elif args.stage == 'sintel':
         aug_params = {'crop_size': args.image_size, 'min_scale': -0.2, 'max_scale': 0.6, 'do_flip': True}
-        things = FlyingThings3D(aug_params, dstype='frames_cleanpass', input_frames=args.input_frames)
+        # things = FlyingThings3D(aug_params, dstype='frames_cleanpass', input_frames=args.input_frames)
         sintel_clean = MpiSintel(aug_params, dstype='clean', input_frames=args.input_frames)
         sintel_final = MpiSintel(aug_params, dstype='final', input_frames=args.input_frames)        
-        hd1k = HD1K({'crop_size': args.image_size, 'min_scale': -0.5, 'max_scale': 0.2, 'do_flip': True}, input_frames=args.input_frames)
-        kitti = KITTI({'crop_size': args.image_size, 'min_scale': -0.3, 'max_scale': 0.5, 'do_flip': True}, input_frames=args.input_frames)
+        # hd1k = HD1K({'crop_size': args.image_size, 'min_scale': -0.5, 'max_scale': 0.2, 'do_flip': True}, input_frames=args.input_frames)
+        # kitti = KITTI({'crop_size': args.image_size, 'min_scale': -0.3, 'max_scale': 0.5, 'do_flip': True}, input_frames=args.input_frames)
 
-        print("[dataset len: ]", len(things), len(sintel_clean), len(hd1k), len(kitti))
+        print("[dataset len: ]", len(sintel_clean))
+        # print("[dataset len: ]", len(things), len(sintel_clean), len(hd1k), len(kitti))
 
-        train_dataset = 100*sintel_clean + 100*sintel_final + 50*kitti + 5*hd1k + things
-    
+        train_dataset = 100*sintel_clean + 100*sintel_final
+        # train_dataset = 100*sintel_clean + 100*sintel_final + 50*kitti + 5*hd1k + things
+
     elif args.stage == 'kitti':
         aug_params = {'crop_size': args.image_size, 'min_scale': -0.2, 'max_scale': 0.4, 'do_flip': False}
         train_dataset = KITTICenter(aug_params, input_frames=args.input_frames)
 
     train_loader = data.DataLoader(train_dataset, batch_size=args.batch_size, 
-        pin_memory=False, shuffle=True, num_workers=args.batch_size*2, drop_last=True)
+        pin_memory=False, shuffle=True, num_workers=args.batch_size, drop_last=True)
 
     print('Training with %d image pairs' % len(train_dataset))
     return train_loader
+
 
 if __name__ == "__main__":
     print("hi!!!!!!!!!!!!!!!")

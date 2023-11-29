@@ -44,6 +44,9 @@ except:
 
 from torchvision.utils import save_image
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
+print(torch.cuda.device_count())
+
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
@@ -105,7 +108,8 @@ def train(cfg):
                 break
 
     logger.close()
-    PATH = cfg.log_dir + '/final'
+    os.mkdir(cfg.log_dir + '/final')
+    PATH = cfg.log_dir + '/final/MOF_sintel_train.pth'
     torch.save(model.state_dict(), PATH)
 
     return PATH
@@ -132,4 +136,4 @@ if __name__ == '__main__':
     torch.manual_seed(1234)
     np.random.seed(1234)
 
-    train(cfg)
+    print(train(cfg))
